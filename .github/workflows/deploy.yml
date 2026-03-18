@@ -1,0 +1,50 @@
+name: Deploy to Aliyun Nginx
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Aliyun Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.ALIYUN_HOST }}
+          username: ${{ secrets.ALIYUN_USERNAME }}
+          key: ${{ secrets.ALIYUN_SSH_KEY }}
+          port: ${{ secrets.ALIYUN_PORT }}
+          script: |
+            # 设置项目目录
+            PROJECT_DIR="/var/www/weight-manager"
+
+            # 创建目录（如果不存在）
+            mkdir -p $PROJECT_DIR
+
+            # 备份旧版本
+            if [ -d "$PROJECT_DIR" ]; then
+              rm -rf $PROJECT_DIR/backup
+              cp -r $PROJECT_DIR $PROJECT_DIR/backup
+            fi
+
+            # 拉取最新代码
+            cd /tmp
+            rm -rf weight-manager
+            git clone https://github.com/jieyuhua998/weight-manager.git
+            cd weight-manager
+
+            # 复制文件到项目目录
+            cp -r index.html styles.css script.js README.md $PROJECT_DIR/
+
+            # 清理临时文件
+            cd ..
+            rm -rf weight-manager
+
+            echo "Deploy completed at $(date)"
