@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>体重管理 - BMI & 体脂率计算器</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>体重管理助手</h1>
+            <p class="subtitle">科学管理您的健康体重</p>
+        </header>
+
+        <main>
+            <!-- BMI 计算器 -->
+            <section class="calculator-card">
+                <div class="card-header bmi-header">
+                    <h2>BMI 计算器</h2>
+                    <span class="icon">⚖️</span>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <label for="height">身高 (cm)</label>
+                        <input type="number" id="height" placeholder="请输入身高" min="50" max="250">
+                    </div>
+                    <div class="input-group">
+                        <label for="weight">体重 (kg)</label>
+                        <input type="number" id="weight" placeholder="请输入体重" min="20" max="300" step="0.1">
+                    </div>
+                    <button class="btn btn-primary" onclick="calculateBMI()">计算 BMI</button>
+                    <div id="bmi-result" class="result-box hidden">
+                        <div class="result-value">
+                            <span class="label">您的 BMI:</span>
+                            <span id="bmi-value" class="value"></span>
+                        </div>
+                        <div class="result-status" id="bmi-status"></div>
+                        <div class="bmi-scale">
+                            <div class="scale-bar">
+                                <div class="scale-indicator" id="bmi-indicator"></div>
+                            </div>
+                            <div class="scale-labels">
+                                <span>偏瘦</span>
+                                <span>正常</span>
+                                <span>偏胖</span>
+                                <span>肥胖</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 体脂率计算器 -->
+            <section class="calculator-card">
+                <div class="card-header fat-header">
+                    <h2>体脂率计算器</h2>
+                    <span class="icon">📊</span>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <label for="gender">性别</label>
+                        <select id="gender">
+                            <option value="male">男性</option>
+                            <option value="female">女性</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="age">年龄</label>
+                        <input type="number" id="age" placeholder="请输入年龄" min="10" max="100">
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group half">
+                            <label for="waist">腰围 (cm)</label>
+                            <input type="number" id="waist" placeholder="腰围" min="40" max="200">
+                        </div>
+                        <div class="input-group half">
+                            <label for="neck">颈围 (cm)</label>
+                            <input type="number" id="neck" placeholder="颈围" min="20" max="80">
+                        </div>
+                    </div>
+                    <div class="input-group" id="hip-group">
+                        <label for="hip">臀围 (cm) - 仅女性需要</label>
+                        <input type="number" id="hip" placeholder="臀围" min="50" max="200">
+                    </div>
+                    <button class="btn btn-secondary" onclick="calculateBodyFat()">计算体脂率</button>
+                    <div id="fat-result" class="result-box hidden">
+                        <div class="result-value">
+                            <span class="label">您的体脂率:</span>
+                            <span id="fat-value" class="value"></span>
+                        </div>
+                        <div class="result-status" id="fat-status"></div>
+                        <div class="fat-info">
+                            <div class="info-item">
+                                <span class="info-label">体脂分类:</span>
+                                <span id="fat-category" class="info-value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">健康范围:</span>
+                                <span id="fat-range" class="info-value"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 健康建议 -->
+            <section class="tips-card">
+                <h3>健康小贴士</h3>
+                <div class="tips-list">
+                    <div class="tip-item">
+                        <span class="tip-icon">🍎</span>
+                        <p>保持均衡饮食，多吃蔬菜水果，减少高热量食物摄入</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">🏃</span>
+                        <p>每周至少进行150分钟中等强度有氧运动</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">💧</span>
+                        <p>每天饮用足够的水，保持身体水分平衡</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">😴</span>
+                        <p>保证充足的睡眠，成年人每天需要7-9小时睡眠</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>仅供参考，如有健康问题请咨询专业医生</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

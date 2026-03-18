@@ -1,0 +1,357 @@
+/* 基础样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* 头部样式 */
+header {
+    text-align: center;
+    padding: 30px 0;
+    color: white;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+header .subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* 卡片基础样式 */
+.calculator-card, .tips-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    margin-bottom: 25px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.calculator-card:hover, .tips-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.card-header h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.card-header .icon {
+    font-size: 1.8rem;
+}
+
+.bmi-header {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.fat-header {
+    background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
+}
+
+.card-body {
+    padding: 25px;
+}
+
+/* 输入组样式 */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.input-group input::placeholder {
+    color: #aaa;
+}
+
+.input-row {
+    display: flex;
+    gap: 15px;
+}
+
+.input-group.half {
+    flex: 1;
+}
+
+/* 按钮样式 */
+.btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 5px 20px rgba(17, 153, 142, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
+    color: white;
+}
+
+.btn-secondary:hover {
+    box-shadow: 0 5px 20px rgba(238, 9, 121, 0.4);
+    transform: translateY(-2px);
+}
+
+/* 结果框样式 */
+.result-box {
+    margin-top: 25px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 12px;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result-box.hidden {
+    display: none;
+}
+
+.result-value {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.result-value .label {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.result-value .value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.result-status {
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.status-underweight {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.status-normal {
+    background: #e8f5e9;
+    color: #388e3c;
+}
+
+.status-overweight {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+.status-obese {
+    background: #ffebee;
+    color: #d32f2f;
+}
+
+/* BMI 刻度条 */
+.bmi-scale {
+    margin-top: 20px;
+}
+
+.scale-bar {
+    height: 12px;
+    background: linear-gradient(to right, 
+        #2196f3 0%, #2196f3 25%,
+        #4caf50 25%, #4caf50 50%,
+        #ff9800 50%, #ff9800 75%,
+        #f44336 75%, #f44336 100%);
+    border-radius: 6px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.scale-indicator {
+    position: absolute;
+    top: -8px;
+    width: 4px;
+    height: 28px;
+    background: #333;
+    border-radius: 2px;
+    transition: left 0.5s ease;
+}
+
+.scale-indicator::after {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #333;
+}
+
+.scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* 体脂信息 */
+.fat-info {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+
+.info-label {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.info-value {
+    font-weight: 600;
+    color: #333;
+}
+
+/* 健康小贴士 */
+.tips-card {
+    background: white;
+    padding: 25px;
+}
+
+.tips-card h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.tips-list {
+    display: grid;
+    gap: 15px;
+}
+
+.tip-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 12px;
+}
+
+.tip-icon {
+    font-size: 1.8rem;
+}
+
+.tip-item p {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* 页脚 */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .input-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .result-value .value {
+        font-size: 2rem;
+    }
+}
