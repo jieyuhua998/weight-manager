@@ -14,7 +14,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy to Aliyun Server
+      - name: Deploy to Aliyun Server via SCP
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.ALIYUN_HOST }}
+          username: ${{ secrets.ALIYUN_USERNAME }}
+          key: ${{ secrets.ALIYUN_SSH_KEY }}
+          port: ${{ secrets.ALIYUN_PORT }}
+          source: "index.html,styles.css,script.js,README.md"
+          target: "/tmp/weight-manager-deploy"
+          strip_components: 0
+
+      - name: Move files to target directory
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.ALIYUN_HOST }}
@@ -34,17 +45,10 @@ jobs:
               cp -r $PROJECT_DIR $PROJECT_DIR/backup
             fi
 
-            # 拉取最新代码
-            cd /tmp
-            rm -rf weight-manager
-            git clone https://github.com/jieyuhua998/weight-manager.git
-            cd weight-manager
-
             # 复制文件到项目目录
-            cp -r index.html styles.css script.js README.md $PROJECT_DIR/
+            cp -r /tmp/weight-manager-deploy/* $PROJECT_DIR/
 
             # 清理临时文件
-            cd ..
-            rm -rf weight-manager
+            rm -rf /tmp/weight-manager-deploy
 
             echo "Deploy completed at $(date)"
