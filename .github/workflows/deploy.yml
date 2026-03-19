@@ -23,7 +23,7 @@ jobs:
           port: ${{ secrets.ALIYUN_PORT }}
           script: |
             # 设置项目目录
-            PROJECT_DIR="/var/www/weight-manager"
+            PROJECT_DIR="/usr/local/nginx/html/hls2"
 
             # 创建目录（如果不存在）
             mkdir -p $PROJECT_DIR
